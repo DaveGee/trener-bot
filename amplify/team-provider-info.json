@@ -10,6 +10,11 @@
             "StackName": "amplify-trenerbot-dev-225556",
             "StackId": "arn:aws:cloudformation:us-east-1:474488076985:stack/amplify-trenerbot-dev-225556/f533c620-4861-11ea-b54c-0e91a2a31d14",
             "AmplifyAppId": "dmm0uuv0w6yf5"
+        },
+        "categories": {
+            "auth": {
+                "trenerbot81ae6a93": {}
+            }
         }
     }
 }
