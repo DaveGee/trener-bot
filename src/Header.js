@@ -33,7 +33,7 @@ export default () => {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Trener Bot
-      </Typography>
+          </Typography>
           <Button color="inherit" onClick={signOut}>Logout</Button>
         </Toolbar>
       </AppBar>

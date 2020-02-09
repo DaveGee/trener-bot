@@ -3,12 +3,11 @@ import React from 'react'
 import { CssBaseline, Container } from '@material-ui/core'
 
 import Header from './Header'
-import CardList from './CardList'
+import CardList from './CardList/CardList'
 
 import Amplify from 'aws-amplify'
 import awsconfig from './aws-exports'
 import { withAuthenticator } from 'aws-amplify-react'
-import './App.css';
 
 Amplify.configure(awsconfig)
 
@@ -16,7 +15,7 @@ function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container fixed>
+      <Container fixed maxWidth="md">
         <Header />
         <CardList />
       </Container>

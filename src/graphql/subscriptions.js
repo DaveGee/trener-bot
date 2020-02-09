@@ -7,6 +7,7 @@ export const onCreateCard = /* GraphQL */ `
       id
       question
       answer
+      createdAt
     }
   }
 `;
@@ -16,6 +17,7 @@ export const onUpdateCard = /* GraphQL */ `
       id
       question
       answer
+      createdAt
     }
   }
 `;
@@ -25,6 +27,7 @@ export const onDeleteCard = /* GraphQL */ `
       id
       question
       answer
+      createdAt
     }
   }
 `;

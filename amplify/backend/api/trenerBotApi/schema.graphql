@@ -2,4 +2,5 @@ type Card @model {
   id: ID!
   question: String!
   answer: String
+  createdAt: AWSDateTime
 }

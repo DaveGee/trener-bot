@@ -7,6 +7,7 @@ export const getCard = /* GraphQL */ `
       id
       question
       answer
+      createdAt
     }
   }
 `;
@@ -21,6 +22,7 @@ export const listCards = /* GraphQL */ `
         id
         question
         answer
+        createdAt
       }
       nextToken
     }
