@@ -1,4 +1,7 @@
 import React from 'react'
+
+import { CssBaseline, Container } from '@material-ui/core'
+
 import Header from './Header'
 import CardList from './CardList'
 
@@ -11,10 +14,13 @@ Amplify.configure(awsconfig)
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <CardList />
-    </div>
+    <React.Fragment>
+      <CssBaseline />
+      <Container fixed>
+        <Header />
+        <CardList />
+      </Container>
+    </React.Fragment>
   )
 }
 
