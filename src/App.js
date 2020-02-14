@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { 
   CssBaseline, 
@@ -10,7 +10,7 @@ import {
 import Header from './Header'
 import CardList from './CardList/CardList'
 
-import Amplify from 'aws-amplify'
+import Amplify, { Auth } from 'aws-amplify'
 import awsconfig from './aws-exports'
 import { withAuthenticator } from 'aws-amplify-react'
 
@@ -27,13 +27,23 @@ const theme = createMuiTheme({
 })
 
 function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await Auth.currentAuthenticatedUser()
+      setUser(user)
+    }
+    getUser()
+  }, [])
+
   return (
     <React.Fragment>
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <Container fixed maxWidth="md">
           <Header />
-          <CardList />
+          {user && <CardList owner={user} />}
         </Container>
       </ThemeProvider>
     </React.Fragment>

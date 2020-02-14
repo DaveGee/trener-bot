@@ -11,6 +11,10 @@ export const createCard = /* GraphQL */ `
       question
       answer
       createdAt
+      owner
+      quizShowed
+      quizCorrect
+      quizWrong
     }
   }
 `;
@@ -24,6 +28,10 @@ export const updateCard = /* GraphQL */ `
       question
       answer
       createdAt
+      owner
+      quizShowed
+      quizCorrect
+      quizWrong
     }
   }
 `;
@@ -37,6 +45,10 @@ export const deleteCard = /* GraphQL */ `
       question
       answer
       createdAt
+      owner
+      quizShowed
+      quizCorrect
+      quizWrong
     }
   }
 `;

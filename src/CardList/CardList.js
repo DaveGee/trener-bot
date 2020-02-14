@@ -42,29 +42,29 @@ async function createNewCard(card) {
   return await API.graphql(graphqlOperation(createCard, { input: card }))
 }
 
-const CardList = () => {
+const CardList = ({ owner }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-
+  
   useEffect(() => {
     async function getData() {
-      const cardData = await API.graphql(graphqlOperation(listCards))
+      const cardData = await API.graphql(graphqlOperation(listCards, { owner: owner.username }))
       dispatch({ type: QUERY, cards: cardData.data.listCards.items })
     }
     getData()
 
-    const deleteSubscription = API.graphql(graphqlOperation(onDeleteCard)).subscribe({
+    const deleteSubscription = API.graphql(graphqlOperation(onDeleteCard, { owner: owner.username })).subscribe({
       next: eventData => {
         dispatch({ type: DELETECARD, id: eventData.value.data.onDeleteCard.id })
       }
     })
 
-    const updateSubscription = API.graphql(graphqlOperation(onUpdateCard)).subscribe({
+    const updateSubscription = API.graphql(graphqlOperation(onUpdateCard, { owner: owner.username })).subscribe({
       next: eventData => {
         dispatch({ type: UPDATECARD, card: eventData.value.data.onUpdateCard })
       }
     })
 
-    const createSubscription = API.graphql(graphqlOperation(onCreateCard)).subscribe({
+    const createSubscription = API.graphql(graphqlOperation(onCreateCard, { owner: owner.username })).subscribe({
       next: eventData => {
         const card = eventData.value.data.onCreateCard
         dispatch({ type: NEWCARD, card })
@@ -76,7 +76,7 @@ const CardList = () => {
       deleteSubscription.unsubscribe()
       updateSubscription.unsubscribe()
     }
-  }, [])
+  }, [owner])
 
   return (
     <React.Fragment>

@@ -8,6 +8,10 @@ export const getCard = /* GraphQL */ `
       question
       answer
       createdAt
+      owner
+      quizShowed
+      quizCorrect
+      quizWrong
     }
   }
 `;
@@ -23,6 +27,10 @@ export const listCards = /* GraphQL */ `
         question
         answer
         createdAt
+        owner
+        quizShowed
+        quizCorrect
+        quizWrong
       }
       nextToken
     }

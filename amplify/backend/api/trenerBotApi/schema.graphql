@@ -1,6 +1,10 @@
-type Card @model {
+type Card @model @auth(rules: [{allow: owner}]) {
   id: ID!
   question: String!
   answer: String
   createdAt: AWSDateTime
+  owner: String
+  quizShowed: Int
+  quizCorrect: Int
+  quizWrong: Int
 }

@@ -2,32 +2,44 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateCard = /* GraphQL */ `
-  subscription OnCreateCard {
-    onCreateCard {
+  subscription OnCreateCard($owner: String!) {
+    onCreateCard(owner: $owner) {
       id
       question
       answer
       createdAt
+      owner
+      quizShowed
+      quizCorrect
+      quizWrong
     }
   }
 `;
 export const onUpdateCard = /* GraphQL */ `
-  subscription OnUpdateCard {
-    onUpdateCard {
+  subscription OnUpdateCard($owner: String!) {
+    onUpdateCard(owner: $owner) {
       id
       question
       answer
       createdAt
+      owner
+      quizShowed
+      quizCorrect
+      quizWrong
     }
   }
 `;
 export const onDeleteCard = /* GraphQL */ `
-  subscription OnDeleteCard {
-    onDeleteCard {
+  subscription OnDeleteCard($owner: String!) {
+    onDeleteCard(owner: $owner) {
       id
       question
       answer
       createdAt
+      owner
+      quizShowed
+      quizCorrect
+      quizWrong
     }
   }
 `;
