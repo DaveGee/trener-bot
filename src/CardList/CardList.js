@@ -106,6 +106,9 @@ const CardList = ({ owner }) => {
         ]}
         data={state.cards}
         title="Cards"
+        options={{
+          actionsColumnIndex: -1
+        }}
       />
     </React.Fragment>
   )
