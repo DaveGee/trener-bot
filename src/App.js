@@ -1,6 +1,11 @@
 import React from 'react'
 
-import { CssBaseline, Container } from '@material-ui/core'
+import { 
+  CssBaseline, 
+  Container, 
+  createMuiTheme, 
+  ThemeProvider 
+} from '@material-ui/core'
 
 import Header from './Header'
 import CardList from './CardList/CardList'
@@ -9,16 +14,28 @@ import Amplify from 'aws-amplify'
 import awsconfig from './aws-exports'
 import { withAuthenticator } from 'aws-amplify-react'
 
+import teal from '@material-ui/core/colors/teal'
+import deepOrange from '@material-ui/core/colors/deepOrange'
+
 Amplify.configure(awsconfig)
+
+const theme = createMuiTheme({
+  palette: {
+    primary: teal,
+    secondary: deepOrange,
+  },
+})
 
 function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container fixed maxWidth="md">
-        <Header />
-        <CardList />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container fixed maxWidth="md">
+          <Header />
+          <CardList />
+        </Container>
+      </ThemeProvider>
     </React.Fragment>
   )
 }
