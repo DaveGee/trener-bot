@@ -102,7 +102,7 @@ const CardList = () => {
         columns={[
           { title: 'Question', field: 'question' },
           { title: 'Answer', field: 'answer' },
-          { title: 'Created', field: 'createdAt', type: 'datetime', defaultSort: 'asc', editable: 'never' },
+          { title: 'Created', field: 'createdAt', type: 'datetime', defaultSort: 'desc', editable: 'never' },
         ]}
         data={state.cards}
         title="Cards"
