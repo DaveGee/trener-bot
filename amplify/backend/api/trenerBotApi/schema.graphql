@@ -4,7 +4,11 @@ type Card @model @auth(rules: [{allow: owner}]) {
   answer: String
   createdAt: AWSDateTime
   owner: String
-  quizShowed: Int
-  quizCorrect: Int
-  quizWrong: Int
+  stats: Stats!
+}
+
+type Stats {
+  showed: Int!
+  correct: Int!
+  wrong: Int!
 }

@@ -12,9 +12,11 @@ export const createCard = /* GraphQL */ `
       answer
       createdAt
       owner
-      quizShowed
-      quizCorrect
-      quizWrong
+      stats {
+        showed
+        correct
+        wrong
+      }
     }
   }
 `;
@@ -29,9 +31,11 @@ export const updateCard = /* GraphQL */ `
       answer
       createdAt
       owner
-      quizShowed
-      quizCorrect
-      quizWrong
+      stats {
+        showed
+        correct
+        wrong
+      }
     }
   }
 `;
@@ -46,9 +50,11 @@ export const deleteCard = /* GraphQL */ `
       answer
       createdAt
       owner
-      quizShowed
-      quizCorrect
-      quizWrong
+      stats {
+        showed
+        correct
+        wrong
+      }
     }
   }
 `;

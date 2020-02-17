@@ -1,6 +1,6 @@
 projects:
   trenerBotApi:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/trenerBotApi/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
