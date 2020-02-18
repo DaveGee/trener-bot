@@ -7,8 +7,9 @@ import PubSub from '@aws-amplify/pubsub'
 import { createCard, deleteCard as deleteCardMutation, updateCard as updateCardMutation } from '../graphql/mutations'
 import { listCards } from '../graphql/queries'
 
-import TextField from '@material-ui/core/TextField'
 import MaterialTable from 'material-table'
+
+import { editFieldSelector, Stats } from './GridComponents'
 
 const QUERY = 'QUERY'
 const NEWCARD = 'NEWCARD'
@@ -36,10 +37,6 @@ const reducer = (state, action) => {
 
 API.configure(awsconfig)
 PubSub.configure(awsconfig)
-
-const statsComponent = (data) => (
-  <div>{data.stats.showed} - {data.stats.correct} - {data.stats.wrong}</div>
-)
 
 const CardList = ({ owner }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -81,15 +78,7 @@ const CardList = ({ owner }) => {
     <React.Fragment>
       <MaterialTable
         components={{
-          EditField: props => (
-            <TextField
-              multiline
-              rowsMax="8" 
-              fullWidth
-              value={props.value}
-              onChange={e => props.onChange(e.target.value)}
-            />
-          )
+          EditField: editFieldSelector
         }}
         editable={{
           isEditable: rowData => true,
@@ -102,7 +91,7 @@ const CardList = ({ owner }) => {
           { title: 'Question', field: 'question' },
           { title: 'Answer', field: 'answer' },
           { title: 'Created', field: 'createdAt', type: 'datetime', defaultSort: 'desc', editable: 'never' },
-          { title: 'Stats', field: 'stats', render: statsComponent }
+          { title: 'Stats', field: 'stats', render: Stats }
         ]}
         data={state.cards}
         title="Cards"
