@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import awsconfig from '../aws-exports'
 
 import API, { graphqlOperation } from '@aws-amplify/api'
@@ -10,41 +10,18 @@ import { listCards } from '../graphql/queries'
 import MaterialTable from 'material-table'
 
 import { editFieldSelector, Stats } from './GridComponents'
-
-const QUERY = 'QUERY'
-const NEWCARD = 'NEWCARD'
-const DELETECARD = 'DELETECARD'
-const UPDATECARD = 'UPDATECARD'
-
-const initialState = {
-  cards: []
-}
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case QUERY:
-      return { ...state, cards: action.cards }
-    case NEWCARD:
-      return { ...state, cards: [...state.cards, action.card] }
-    case DELETECARD:
-      return { ...state, cards: state.cards.reduce((acc, c) => c.id !== action.id ? [...acc, c] : acc, []) }
-    case UPDATECARD:
-      return { ...state, cards: state.cards.map(c => c.id === action.card.id ? action.card : c) }
-    default:
-      return state
-  }
-}
+import { useCardReducer, QUERY } from './cardReducer'
 
 API.configure(awsconfig)
 PubSub.configure(awsconfig)
 
 const CardList = ({ owner }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useCardReducer()
   
   const getData = useCallback(async () => {
     const cardData = await API.graphql(graphqlOperation(listCards, { owner: owner.username }))
     dispatch({ type: QUERY, cards: cardData.data.listCards.items })
-  }, [owner.username])
+  }, [owner.username, dispatch])
 
   async function createNewCard({ question, answer }) {
     const newCard = {
