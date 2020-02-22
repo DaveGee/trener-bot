@@ -1,14 +1,25 @@
 type Card @model @auth(rules: [{allow: owner}]) {
   id: ID!
   question: String!
-  answer: String
+  answer: String!
   createdAt: AWSDateTime
   owner: String
   stats: Stats!
+}
+
+input CardInput {
+  id: ID!
+  question: String!
+  answer: String!
+  owner: String!
 }
 
 type Stats {
   showed: Int!
   correct: Int!
   wrong: Int!
+}
+
+type Mutation {
+  askQuestion(card: CardInput!): Boolean @function(name: "askQuestion-${env}")
 }

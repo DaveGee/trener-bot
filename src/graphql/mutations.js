@@ -1,6 +1,11 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const askQuestion = /* GraphQL */ `
+  mutation AskQuestion($card: CardInput!) {
+    askQuestion(card: $card)
+  }
+`;
 export const createCard = /* GraphQL */ `
   mutation CreateCard(
     $input: CreateCardInput!
