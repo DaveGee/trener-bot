@@ -4,13 +4,19 @@ import awsconfig from '../aws-exports'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import PubSub from '@aws-amplify/pubsub'
 
-import { createCard, deleteCard as deleteCardMutation, updateCard as updateCardMutation } from '../graphql/mutations'
+import { 
+  createCard, 
+  deleteCard as deleteCardMutation, 
+  updateCard as updateCardMutation,
+  askQuestion
+} from '../graphql/mutations'
 import { listCards } from '../graphql/queries'
 
 import MaterialTable from 'material-table'
 
 import { editFieldSelector, Stats } from './GridComponents'
 import { useCardReducer, QUERY } from './cardReducer'
+import QuestionAnswerTwoTone from '@material-ui/icons/QuestionAnswerTwoTone'
 
 API.configure(awsconfig)
 PubSub.configure(awsconfig)
@@ -54,6 +60,16 @@ const CardList = ({ owner }) => {
   return (
     <React.Fragment>
       <MaterialTable
+        actions={[
+          {
+            icon: () => <QuestionAnswerTwoTone />,
+            tooltip: 'Ask!',
+            onClick: async (event, rowData) => {
+              const result = await API.graphql(graphqlOperation(askQuestion, { card: { id: rowData.id, question: rowData.question, answer: rowData.answer, owner: rowData.owner } }))
+              console.log(result)
+            }
+          }
+        ]}
         components={{
           EditField: editFieldSelector
         }}
