@@ -1,10 +1,17 @@
-type Card @model @auth(rules: [{allow: owner}]) {
+type Card 
+  @model(subscriptions: null)
+  @auth(rules: [{allow: owner}]) 
+  @key(fields: ["owner", "stats"])
+{ 
   id: ID!
   question: String!
   answer: String!
   createdAt: AWSDateTime
-  owner: String
-  stats: Stats!
+  owner: String!
+  
+  showed: Int!
+  correct: Int!
+  wrong: Int!
 }
 
 input CardInput {
@@ -12,12 +19,6 @@ input CardInput {
   question: String!
   answer: String!
   owner: String!
-}
-
-type Stats {
-  showed: Int!
-  correct: Int!
-  wrong: Int!
 }
 
 type Mutation {
