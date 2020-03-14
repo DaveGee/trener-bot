@@ -1,0 +1,18 @@
+{
+    "permissions": {
+        "api": {
+            "trenerBotApi": [
+                "read",
+                "update"
+            ]
+        },
+        "auth": {
+            "trenerbot81ae6a93": [
+                "read"
+            ]
+        }
+    },
+    "authtrenerbot81ae6a93UserPoolId": "us-east-1_xxx",
+    "apitrenerBotApiGraphQLAPIIdOutput": "apitrenerBotApiGraphQLAPIIdOutput",
+    "apitrenerBotApiGraphQLAPIEndpointOutput": "apitrenerBotApiGraphQLAPIEndpointOutput"
+}

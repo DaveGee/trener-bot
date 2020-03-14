@@ -16,6 +16,10 @@ The drill sergeant to help you learn your polish vocabulary!
 * `amplify function build` builds all functions currently in the project
 * `amplify function invoke <?askQuestion>` enables you to test a function locally
 
+## Functions
+
+* [sendChallengeToUser](./amplify/backend/function/sendChallengeToUser/README.md)
+
 ## GraphQL stuff
 
 To have mutations and queries linked to `@functions`, you need to put them in `Query` and `Mutation` types...

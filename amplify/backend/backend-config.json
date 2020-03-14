@@ -51,6 +51,28 @@
                     ]
                 }
             ]
+        },
+        "sendChallengeToUser": {
+            "service": "Lambda",
+            "providerPlugin": "awscloudformation",
+            "build": true,
+            "dependsOn": [
+                {
+                    "category": "api",
+                    "resourceName": "trenerBotApi",
+                    "attributes": [
+                        "GraphQLAPIIdOutput",
+                        "GraphQLAPIEndpointOutput"
+                    ]
+                },
+                {
+                    "category": "auth",
+                    "resourceName": "trenerbot81ae6a93",
+                    "attributes": [
+                        "UserPoolId"
+                    ]
+                }
+            ]
         }
     }
 }

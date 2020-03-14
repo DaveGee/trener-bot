@@ -22,4 +22,5 @@ type Stats {
 
 type Mutation {
   askQuestion(card: CardInput!): Boolean @function(name: "askQuestion-${env}")
+  sendChallengeToUser(card: CardInput!): Boolean @function(name: "sendChallengeToUser-${env}")
 }

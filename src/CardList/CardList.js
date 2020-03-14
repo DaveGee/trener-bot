@@ -8,7 +8,7 @@ import {
   createCard, 
   deleteCard as deleteCardMutation, 
   updateCard as updateCardMutation,
-  askQuestion
+  sendChallengeToUser
 } from '../graphql/mutations'
 import { listCards } from '../graphql/queries'
 
@@ -65,7 +65,7 @@ const CardList = ({ owner }) => {
             icon: () => <QuestionAnswerTwoTone />,
             tooltip: 'Ask!',
             onClick: async (event, rowData) => {
-              const result = await API.graphql(graphqlOperation(askQuestion, { card: { id: rowData.id, question: rowData.question, answer: rowData.answer, owner: rowData.owner } }))
+              const result = await API.graphql(graphqlOperation(sendChallengeToUser, { card: { id: rowData.id, question: rowData.question, answer: rowData.answer, owner: rowData.owner } }))
               console.log(result)
             }
           }

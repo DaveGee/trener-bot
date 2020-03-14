@@ -6,6 +6,11 @@ export const askQuestion = /* GraphQL */ `
     askQuestion(card: $card)
   }
 `;
+export const sendChallengeToUser = /* GraphQL */ `
+  mutation SendChallengeToUser($card: CardInput!) {
+    sendChallengeToUser(card: $card)
+  }
+`;
 export const createCard = /* GraphQL */ `
   mutation CreateCard(
     $input: CreateCardInput!
