@@ -1,11 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const askQuestion = /* GraphQL */ `
-  mutation AskQuestion($card: CardInput!) {
-    askQuestion(card: $card)
-  }
-`;
 export const sendChallengeToUser = /* GraphQL */ `
   mutation SendChallengeToUser($card: CardInput!) {
     sendChallengeToUser(card: $card)
@@ -22,11 +17,9 @@ export const createCard = /* GraphQL */ `
       answer
       createdAt
       owner
-      stats {
-        showed
-        correct
-        wrong
-      }
+      showed
+      correct
+      wrong
     }
   }
 `;
@@ -41,11 +34,9 @@ export const updateCard = /* GraphQL */ `
       answer
       createdAt
       owner
-      stats {
-        showed
-        correct
-        wrong
-      }
+      showed
+      correct
+      wrong
     }
   }
 `;
@@ -60,11 +51,9 @@ export const deleteCard = /* GraphQL */ `
       answer
       createdAt
       owner
-      stats {
-        showed
-        correct
-        wrong
-      }
+      showed
+      correct
+      wrong
     }
   }
 `;

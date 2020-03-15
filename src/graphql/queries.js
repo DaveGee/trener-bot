@@ -9,11 +9,9 @@ export const getCard = /* GraphQL */ `
       answer
       createdAt
       owner
-      stats {
-        showed
-        correct
-        wrong
-      }
+      showed
+      correct
+      wrong
     }
   }
 `;
@@ -30,11 +28,9 @@ export const listCards = /* GraphQL */ `
         answer
         createdAt
         owner
-        stats {
-          showed
-          correct
-          wrong
-        }
+        showed
+        correct
+        wrong
       }
       nextToken
     }

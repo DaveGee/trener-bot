@@ -1,7 +1,6 @@
 type Card 
   @model(subscriptions: null)
   @auth(rules: [{allow: owner}]) 
-  @key(fields: ["owner", "showed"])
 { 
   id: ID!
   question: String!
@@ -22,6 +21,5 @@ input CardInput {
 }
 
 type Mutation {
-  askQuestion(card: CardInput!): Boolean @function(name: "askQuestion-${env}")
   sendChallengeToUser(card: CardInput!): Boolean @function(name: "sendChallengeToUser-${env}")
 }
