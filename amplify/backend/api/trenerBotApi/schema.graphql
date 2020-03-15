@@ -1,7 +1,7 @@
 type Card 
   @model(subscriptions: null)
   @auth(rules: [{allow: owner}]) 
-  @key(fields: ["owner", "stats"])
+  @key(fields: ["owner", "showed"])
 { 
   id: ID!
   question: String!

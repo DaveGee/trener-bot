@@ -13,12 +13,6 @@ const reducer = (state, action) => {
   switch (action.type) {
     case QUERY:
       return { ...state, cards: action.cards }
-    case NEWCARD:
-      return { ...state, cards: [...state.cards, action.card] }
-    case DELETECARD:
-      return { ...state, cards: state.cards.reduce((acc, c) => c.id !== action.id ? [...acc, c] : acc, []) }
-    case UPDATECARD:
-      return { ...state, cards: state.cards.map(c => c.id === action.card.id ? action.card : c) }
     default:
       return state
   }
