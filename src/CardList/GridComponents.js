@@ -3,7 +3,7 @@ import React from 'react'
 import { TextField } from '@material-ui/core'
 
 
-function Stats ({ stats: { showed, correct, wrong }}) {
+function Stats ({ showed = 0, correct = 0, wrong = 0 }) {
   return `${showed} - ${correct} - ${wrong}`
 }
 
@@ -15,9 +15,6 @@ function editFieldSelector ({
   value,
   onChange
 }) {
-  if (!rowData.stats) {
-    rowData.stats = { showed: 0, correct: 0, wrong: 0}
-  }
   switch(field) {
     case 'stats':
       return (<Stats {...rowData} />)

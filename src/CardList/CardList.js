@@ -32,12 +32,10 @@ const CardList = ({ owner }) => {
   async function createNewCard({ question, answer }) {
     const newCard = {
       question,
-      answer,
-      stats: { 
-        showed: 0,
-        correct: 0,
-        wrong: 0
-      }
+      answer, 
+      showed: 0,
+      correct: 0,
+      wrong: 0
     }
     await API.graphql(graphqlOperation(createCard, { input: newCard }))
     getData()

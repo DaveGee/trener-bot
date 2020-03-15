@@ -6,7 +6,7 @@ type Card
   question: String!
   answer: String!
   createdAt: AWSDateTime
-  owner: String!
+  owner: String
   
   showed: Int!
   correct: Int!
