@@ -21,3 +21,39 @@ exports[`renders App 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`renders Header 1`] = `
+<DocumentFragment>
+  <div
+    class="makeStyles-root-1"
+  >
+    <header
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary MuiPaper-elevation4"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+      >
+        <h6
+          class="MuiTypography-root makeStyles-title-2 MuiTypography-h6"
+        >
+          Trener Bot
+        </h6>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Logout
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </header>
+  </div>
+</DocumentFragment>
+`;

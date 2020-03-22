@@ -84,7 +84,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-trenerbot-dev-225556-deployment",
-					"S3Key": "amplify-builds/sendChallengeToUser-75686e457a3077737548-build.zip"
+					"S3Key": "amplify-builds/sendChallengeToUser-42364c2b6e476c424857-build.zip"
 				}
 			}
 		},

@@ -21,5 +21,5 @@ input CardInput {
 }
 
 type Mutation {
-  sendChallengeToUser(card: CardInput!): Boolean @function(name: "sendChallengeToUser-${env}")
+  sendChallengeToUser(card: CardInput!, userId: String): Boolean @function(name: "sendChallengeToUser-${env}")
 }

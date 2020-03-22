@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const sendChallengeToUser = /* GraphQL */ `
-  mutation SendChallengeToUser($card: CardInput!) {
-    sendChallengeToUser(card: $card)
+  mutation SendChallengeToUser($card: CardInput!, $userId: String) {
+    sendChallengeToUser(card: $card, userId: $userId)
   }
 `;
 export const createCard = /* GraphQL */ `

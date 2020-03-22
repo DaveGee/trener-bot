@@ -40,14 +40,10 @@ Amplify Params - DO NOT EDIT */
 const region = process.env.REGION
 
 const aws = require('aws-sdk')
-const ses = new aws.SES({ region })
 
-exports.handler = async (event) => {
-
-  const userId = event.identity.sub
-  console.log('Found userId: ', userId)
-
+const getEmailFromCognito = async userId => {
   const cognito = new aws.CognitoIdentityServiceProvider({ region })
+
   const listUsersResponse = await cognito
     .listUsers({
       UserPoolId: process.env.AUTH_TRENERBOT81AE6A93_USERPOOLID,
@@ -58,13 +54,16 @@ exports.handler = async (event) => {
   const user = listUsersResponse.Users[0]
   console.log('Found user: ', user)
 
-  const destEmail = user.Attributes.reduce((email, a) => a.Name === 'email' ? a.Value : email)
+  const emailAttr = user.Attributes.find(a => a.Name === 'email')
+  if (!emailAttr) {
+    throw new Error('No destination email found in Cognito')
+  } 
+  return emailAttr.Value
+}
 
-  if (!destEmail) {
-    console.error('No destination email', event.identity, user)
-    throw new Error('No destination email found in identity. Aborting')
-  }
-  
+const sendEmailTo = async (destEmail, card) => {
+  const ses = new aws.SES({ region })
+
   const params = {
     Destination: {
       ToAddresses: [destEmail]
@@ -72,8 +71,8 @@ exports.handler = async (event) => {
     Message: {
       Body: {
         Text: { Data: `
-          Question: ${event.arguments.card.question}
-          Answer: ${event.arguments.card.answer}
+          Question: ${card.question}
+          Answer: ${card.answer}
         ` }
       },
       Subject: { Data: "Your next challenge!" }
@@ -82,6 +81,32 @@ exports.handler = async (event) => {
   }
 
   await ses.sendEmail(params).promise()
+}
+
+exports.sendEmailTo = sendEmailTo
+exports.getEmailFromCognito = getEmailFromCognito
+
+exports.handler = async (event) => {
+
+  let userId
+  if (!event.arguments || !event.arguments.userId) {
+    throw new Error('No userId specified')
+  }
+  userId = event.arguments.userId
+
+  let identityUserId 
+  if (event.identity) {
+    identityUserId = event.identity.sub
+    console.log('Found userId in identity: ', identityUserId)
+  }
+  
+  if (identityUserId && identityUserId !== event.arguments.userId) {
+    throw new Error('userId and provided identity do not match. Unauthorized')
+  }
+
+  const destEmail = await getEmailFromCognito(userId)
+
+  await sendEmailTo(destEmail, event.arguments.card)
   
   return true
 }

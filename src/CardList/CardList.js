@@ -63,7 +63,13 @@ const CardList = ({ owner }) => {
             icon: () => <QuestionAnswerTwoTone />,
             tooltip: 'Ask!',
             onClick: async (event, rowData) => {
-              const result = await API.graphql(graphqlOperation(sendChallengeToUser, { card: { id: rowData.id, question: rowData.question, answer: rowData.answer, owner: rowData.owner } }))
+              const card = { 
+                id: rowData.id, 
+                question: rowData.question, 
+                answer: rowData.answer, 
+                owner: rowData.owner 
+              }
+              const result = await API.graphql(graphqlOperation(sendChallengeToUser, { card, userId: owner.username }))
               console.log(result)
             }
           }
