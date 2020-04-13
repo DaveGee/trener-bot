@@ -44,3 +44,38 @@ export const listCards = /* GraphQL */ `
     }
   }
 `;
+export const cardsByOldestPractice = /* GraphQL */ `
+  query CardsByOldestPractice(
+    $owner: String
+    $nextPractice: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCardFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    cardsByOldestPractice(
+      owner: $owner
+      nextPractice: $nextPractice
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        question
+        answer
+        createdAt
+        owner
+        showed
+        correct
+        wrong
+        repetitions
+        interval
+        easiness
+        nextPractice
+      }
+      nextToken
+    }
+  }
+`;

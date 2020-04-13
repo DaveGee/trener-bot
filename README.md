@@ -56,3 +56,10 @@ Example of a `function-parameters.json` :
   "apitrenerBotApiGraphQLAPIEndpointOutput": "apitrenerBotApiGraphQLAPIEndpointOutput"
 }
 ```
+
+## Default values
+
+* found in VTL templates how to setup defaults values in template
+* However, how to set a computed value on update is more complex (wrongness = (wrong - correct) / showed) --> there's no access to other properties on update apparently
+* Will do the computation in the client, with some risk of missing some items
+

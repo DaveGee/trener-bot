@@ -10,8 +10,8 @@ select
     ,json_extract(ObjectJSON, '$.interval.N') as interval
     ,json_extract(ObjectJSON, '$.repetitions.N') as repetitions
     ,json_extract(ObjectJSON, '$.easiness.N') as easiness
-    ,json_extract(ObjectJSON, '$.nextPractice.N') as nextPractice
+    ,json_extract(ObjectJSON, '$.nextPractice.S') as nextPractice
 from CardTable;
 
 --delete from CardTable
---where json_extract(ObjectJSON, '$.id.S') = 'c3a20435-da21-482f-8e48-f64eff72c4aa';
+--where json_extract(ObjectJSON, '$.id.S') = '4649ff3f-b5cc-4230-957f-e2146a94579d';
