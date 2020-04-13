@@ -20,6 +20,10 @@ export const createCard = /* GraphQL */ `
       showed
       correct
       wrong
+      repetitions
+      interval
+      easiness
+      nextPractice
     }
   }
 `;
@@ -37,6 +41,10 @@ export const updateCard = /* GraphQL */ `
       showed
       correct
       wrong
+      repetitions
+      interval
+      easiness
+      nextPractice
     }
   }
 `;
@@ -54,6 +62,10 @@ export const deleteCard = /* GraphQL */ `
       showed
       correct
       wrong
+      repetitions
+      interval
+      easiness
+      nextPractice
     }
   }
 `;

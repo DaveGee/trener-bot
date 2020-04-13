@@ -8,9 +8,14 @@ type Card
   createdAt: AWSDateTime
   owner: String
   
-  showed: Int!
-  correct: Int!
-  wrong: Int!
+  showed: Int
+  correct: Int
+  wrong: Int
+
+  repetitions: Int
+  interval: Int
+  easiness: Float
+  nextPractice: AWSDateTime
 }
 
 input CardInput {

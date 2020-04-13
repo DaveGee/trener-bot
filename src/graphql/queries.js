@@ -12,6 +12,10 @@ export const getCard = /* GraphQL */ `
       showed
       correct
       wrong
+      repetitions
+      interval
+      easiness
+      nextPractice
     }
   }
 `;
@@ -31,6 +35,10 @@ export const listCards = /* GraphQL */ `
         showed
         correct
         wrong
+        repetitions
+        interval
+        easiness
+        nextPractice
       }
       nextToken
     }
