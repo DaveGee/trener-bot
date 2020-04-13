@@ -1,0 +1,20 @@
+{
+    "permissions": {
+        "api": {
+            "trenerBotApi": [
+                "read",
+                "update"
+            ]
+        },
+        "auth": {
+            "trenerbot81ae6a93": [
+                "read"
+            ]
+        },
+        "function": {
+            "sendChallengeToUser": [
+                "read"
+            ]
+        }
+    }
+}
