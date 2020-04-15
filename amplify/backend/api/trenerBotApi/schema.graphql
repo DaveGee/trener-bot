@@ -1,6 +1,9 @@
 type Card 
   @model(subscriptions: null)
-  @auth(rules: [{allow: owner}]) 
+  @auth(rules: [
+    { allow: owner }
+    { allow: private, provider: iam, operations: [read] }
+  ]) 
   @key(name: "ByOldestPractice", fields: ["owner", "nextPractice"], queryField: "cardsByOldestPractice")
 { 
   id: ID!

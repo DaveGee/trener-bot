@@ -57,9 +57,15 @@ Example of a `function-parameters.json` :
 }
 ```
 
-## Default values
+## Default values in the database
 
 * found in VTL templates how to setup defaults values in template
 * However, how to set a computed value on update is more complex (wrongness = (wrong - correct) / showed) --> there's no access to other properties on update apparently
 * Will do the computation in the client, with some risk of missing some items
 
+## Multiple auth, and graphql from another lambda
+
+* Need to add @auth private with both cognito and iam
+* lambda connects with IAM, gets SECRETS when it has the right permissions
+* super helpful: https://medium.com/@jan.hesters/how-to-use-aws-appsync-in-lambda-functions-e593a9cef1d5
+* add all 4 update, read, create, delete to get access to your API from your lambda

@@ -2,8 +2,10 @@
     "permissions": {
         "api": {
             "trenerBotApi": [
+                "create",
                 "read",
-                "update"
+                "update",
+                "delete"
             ]
         },
         "auth": {
