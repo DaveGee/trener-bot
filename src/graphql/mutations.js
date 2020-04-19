@@ -27,12 +27,12 @@ export const createCard = /* GraphQL */ `
     }
   }
 `;
-export const updateCard = /* GraphQL */ `
-  mutation UpdateCard(
-    $input: UpdateCardInput!
+export const deleteCard = /* GraphQL */ `
+  mutation DeleteCard(
+    $input: DeleteCardInput!
     $condition: ModelCardConditionInput
   ) {
-    updateCard(input: $input, condition: $condition) {
+    deleteCard(input: $input, condition: $condition) {
       id
       question
       answer
@@ -48,12 +48,12 @@ export const updateCard = /* GraphQL */ `
     }
   }
 `;
-export const deleteCard = /* GraphQL */ `
-  mutation DeleteCard(
-    $input: DeleteCardInput!
+export const updateCard = /* GraphQL */ `
+  mutation UpdateCard(
+    $input: UpdateCardInput!
     $condition: ModelCardConditionInput
   ) {
-    deleteCard(input: $input, condition: $condition) {
+    updateCard(input: $input, condition: $condition) {
       id
       question
       answer

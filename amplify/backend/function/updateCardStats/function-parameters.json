@@ -1,0 +1,17 @@
+{
+    "permissions": {
+        "api": {
+            "trenerBotApi": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ]
+        },
+        "auth": {
+            "trenerbot81ae6a93": [
+                "read"
+            ]
+        }
+    }
+}
