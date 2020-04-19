@@ -85,8 +85,10 @@ const sendCardToUser = async (userId, card) => {
   const senderEvent = {
     FunctionName: sendToUserLambda,
     InvokeArgs: JSON.stringify({
-      userId,
-      card
+      arguments: {
+        userId,
+        card
+      }
     })
   }
   const lambda = new AWS.Lambda()
@@ -101,19 +103,20 @@ const handler = async (event) => {
 
   try {
 
-    const data = await exports.getCards(userId)
+    const result = await exports.getCards(userId)
     let card = null
-    if (!data 
-      || !data.cardsByOldestPractice 
-      || !data.cardsByOldestPractice.items 
-      || !data.cardsByOldestPractice.items.length) 
+    if (!result
+      || !result.data 
+      || !result.data.cardsByOldestPractice 
+      || !result.data.cardsByOldestPractice.items 
+      || !result.data.cardsByOldestPractice.items.length) 
     {
       console.log(`User ${event.arguments.userId} has no card in deck, or all cards are sufficiently trained`)
+      console.log('data returned: ', result)
     } else {
-      card = data.cardsByOldestPractice.items.reduce(nextChallengeReducer)
+      card = result.data.cardsByOldestPractice.items.reduce(nextChallengeReducer)
+      await sendCardToUser(userId, card)
     }
-
-    await sendCardToUser(userId, card)
 
     return { 
       card 

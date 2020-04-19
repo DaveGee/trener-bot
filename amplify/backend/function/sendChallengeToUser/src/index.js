@@ -87,7 +87,6 @@ exports.sendEmailTo = sendEmailTo
 exports.getEmailFromCognito = getEmailFromCognito
 
 exports.handler = async (event) => {
-
   let userId
   if (!event.arguments || !event.arguments.userId) {
     throw new Error('No userId specified')

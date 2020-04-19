@@ -41,7 +41,7 @@ describe('GetNextChallenge should', () => {
     }
   })
 
-  test('get cards of the user, with a practice date up to tomorrow', async () => {
+  test('get cards of the user', async () => {
     getCardsMock.mockImplementation(() => set1.mockResult)
 
     const result = await getNextChallenge.handler(argumentWithUser)
@@ -49,6 +49,9 @@ describe('GetNextChallenge should', () => {
     expect(getCardsMock).toHaveBeenCalledWith('user1')
     expect(result.card).toBe(set1.nextChallenge)
   })
+
+  // will need mocking of client.query!
+  test.todo('get cards of the user, passing today as the limit')
   
   test('return no card, but logs something if there is no card available', async () => {
     getCardsMock.mockImplementation(() => null)
@@ -92,12 +95,31 @@ describe('GetNextChallenge should', () => {
     const expectedArguments = {
       FunctionName: process.env.FUNCTION_SENDCHALLENGETOUSER_NAME,
       InvokeArgs: JSON.stringify({
+        arguments: {
+          userId: user1,
+          card: set1.nextChallenge
+        }
+      })
+    }
+
+    expect(lambdaInvoke).toHaveBeenCalledWith(expectedArguments)
+  })
+
+  test('only send challenges when a card is returned', async () => {
+    getCardsMock.mockImplementation(() => null)
+    console.log = jest.fn()
+
+    await getNextChallenge.handler(argumentWithUser)
+
+    const expectedArguments = {
+      FunctionName: process.env.FUNCTION_SENDCHALLENGETOUSER_NAME,
+      InvokeArgs: JSON.stringify({
         userId: user1,
         card: set1.nextChallenge
       })
     }
 
-    expect(lambdaInvoke).toHaveBeenCalledWith(expectedArguments)
+    expect(lambdaInvoke).not.toHaveBeenCalled()
   })
 
   test.todo('update the showed statistic, asynchronously')
