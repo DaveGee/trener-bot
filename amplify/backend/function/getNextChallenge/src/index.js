@@ -20,6 +20,7 @@ const { DateTime } = require('luxon')
 
 const url = process.env.API_TRENERBOTAPI_GRAPHQLAPIENDPOINTOUTPUT
 const region = process.env.REGION
+const sendToUserLambda = process.env.FUNCTION_SENDCHALLENGETOUSER_NAME
 
 AWS.config.update({
   region,
@@ -80,13 +81,27 @@ const nextChallengeReducer = (nextChallenge, card) => {
     return card
 }
 
+const sendCardToUser = async (userId, card) => {
+  const senderEvent = {
+    FunctionName: sendToUserLambda,
+    InvokeArgs: JSON.stringify({
+      userId,
+      card
+    })
+  }
+  const lambda = new AWS.Lambda()
+  await lambda.invokeAsync(senderEvent).promise()
+}
+
 const handler = async (event) => {
   if (!event || !event.arguments || !event.arguments.userId)
     throw new Error('No owner specified for getNextChallenge')
 
+  const userId = event.arguments.userId
+
   try {
 
-    const data = await exports.getCards(event.arguments.userId)
+    const data = await exports.getCards(userId)
     let card = null
     if (!data 
       || !data.cardsByOldestPractice 
@@ -97,6 +112,8 @@ const handler = async (event) => {
     } else {
       card = data.cardsByOldestPractice.items.reduce(nextChallengeReducer)
     }
+
+    await sendCardToUser(userId, card)
 
     return { 
       card 

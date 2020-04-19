@@ -1,8 +1,9 @@
 
 process.env.API_TRENERBOTAPI_GRAPHQLAPIENDPOINTOUTPUT = 'https://localhost/graphql'
+process.env.FUNCTION_SENDCHALLENGETOUSER_NAME = 'sendChallengeToUserLambda'
 process.env.REGION = 'us-east-1'
 
-const aws = require('../../amplify/backend/function/sendChallengeToUser/src/node_modules/aws-sdk')
+const aws = require('../../amplify/backend/function/getNextChallenge/src/node_modules/aws-sdk')
 const getNextChallenge = require('../../amplify/backend/function/getNextChallenge/src/index')
 
 const { set1, set2, set3 } = require('../__mocks__/cardset')
@@ -15,6 +16,21 @@ describe('GetNextChallenge should', () => {
     arguments: { userId: user1 }
   }
   const noCardResult = { card: null }
+  let lambdaInvoke
+
+  const mockLambdaInvokeAsync = () => {
+    const invokeAsync = jest.fn().mockReturnValue({
+      promise: jest.fn().mockResolvedValue()
+    })
+    aws.Lambda = jest.fn().mockImplementation(() => ({
+      invokeAsync
+    }))
+    return invokeAsync
+  }
+
+  beforeEach(() => {
+    lambdaInvoke = mockLambdaInvokeAsync()
+  })
 
   test('throw an error if called without specifying the owner', async () => {
     expect.assertions(1)
@@ -68,4 +84,22 @@ describe('GetNextChallenge should', () => {
     expect(result.card).toEqual(set3.nextChallenge)
   })
 
-})
+  test('send next challenge to the user, asynchronously', async () => {
+    getCardsMock.mockImplementation(() => set1.mockResult)
+
+    await getNextChallenge.handler(argumentWithUser)
+
+    const expectedArguments = {
+      FunctionName: process.env.FUNCTION_SENDCHALLENGETOUSER_NAME,
+      InvokeArgs: JSON.stringify({
+        userId: user1,
+        card: set1.nextChallenge
+      })
+    }
+
+    expect(lambdaInvoke).toHaveBeenCalledWith(expectedArguments)
+  })
+
+  test.todo('update the showed statistic, asynchronously')
+
+})  
