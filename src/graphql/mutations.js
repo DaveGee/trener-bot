@@ -24,6 +24,7 @@ export const createCard = /* GraphQL */ `
       interval
       easiness
       nextPractice
+      updatedAt
     }
   }
 `;
@@ -45,6 +46,7 @@ export const deleteCard = /* GraphQL */ `
       interval
       easiness
       nextPractice
+      updatedAt
     }
   }
 `;
@@ -66,6 +68,7 @@ export const updateCard = /* GraphQL */ `
       interval
       easiness
       nextPractice
+      updatedAt
     }
   }
 `;

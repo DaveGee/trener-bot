@@ -44,6 +44,15 @@ const appsyncClient = new AWSAppSyncClient(
 
 const mutation = gql(graphqlQuery)
 
+/**
+ * 
+ * event = {
+ *    arguments: {
+ *      userId
+ *      card
+ *    }
+ * }
+ */
 exports.handler = async (event) => {
   if (!event || !event.arguments || !event.arguments.userId)
     throw new Error('No owner specified for updateCardStats')
@@ -59,11 +68,9 @@ exports.handler = async (event) => {
   
     const client = await appsyncClient.hydrated()
     const result = await client.mutate({ mutation, variables })
-
-    console.log('result', result)
     
     return { 
-      updatedCard: card
+      updatedCard: result.data.updateCard
     }
 
   } catch (error) {

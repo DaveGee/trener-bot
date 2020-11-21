@@ -16,6 +16,7 @@ export const getCard = /* GraphQL */ `
       interval
       easiness
       nextPractice
+      updatedAt
     }
   }
 `;
@@ -39,6 +40,7 @@ export const listCards = /* GraphQL */ `
         interval
         easiness
         nextPractice
+        updatedAt
       }
       nextToken
     }
@@ -74,6 +76,7 @@ export const cardsByOldestPractice = /* GraphQL */ `
         interval
         easiness
         nextPractice
+        updatedAt
       }
       nextToken
     }
