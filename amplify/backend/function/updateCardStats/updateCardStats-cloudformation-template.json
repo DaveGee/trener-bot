@@ -89,7 +89,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-trenerbot-dev-225556-deployment",
-          "S3Key": "amplify-builds/updateCardStats-4350764d2f552f766f66-build.zip"
+          "S3Key": "amplify-builds/updateCardStats-70456739557550693470-build.zip"
         }
       }
     },

@@ -15,6 +15,8 @@ const gql = require('graphql-tag')
 require('es6-promise').polyfill()
 require('isomorphic-fetch')
 
+const superMemo = require('./superMemo.js')
+
 const { DateTime } = require('luxon')
 
 const url = process.env.API_TRENERBOTAPI_GRAPHQLAPIENDPOINTOUTPUT
@@ -44,6 +46,8 @@ const appsyncClient = new AWSAppSyncClient(
 
 const mutation = gql(graphqlQuery)
 
+const isNumber = x => typeof x === 'number'
+
 /**
  * 
  * event = {
@@ -57,14 +61,36 @@ exports.handler = async (event) => {
   if (!event || !event.arguments || !event.arguments.userId)
     throw new Error('No owner specified for updateCardStats')
 
+  if (event.arguments.card === undefined || event.arguments.card === null)
+    throw new Error('No stat input provided to updateCardStats')
+
   const userId = event.arguments.userId
   const card = event.arguments.card
 
-  try {
+  let cardMutator = {
+    id: card.id
+  }
+  if (isNumber(card.showed))
+    cardMutator.showed = card.showed
+  if (isNumber(card.correct))
+    cardMutator.correct = card.correct
+  if (isNumber(card.wrong))
+    cardMutator.wrong = card.wrong
 
-    const variables = {
-      card
-    }
+  if (isNumber(event.arguments.quality)) {
+    const defaultValues = superMemo.defaultCard()
+    cardMutator.easiness = isNumber(card.easiness) ? card.easiness : defaultValues.easiness
+    cardMutator.repetitions = isNumber(card.repetitions) ? card.repetitions : defaultValues.repetitions
+    cardMutator.interval = isNumber(card.interval) ? card.interval : defaultValues.interval
+    
+    cardMutator = superMemo.update(cardMutator, event.arguments.quality)
+  }
+
+  const variables = {
+    cardMutator
+  }
+
+  try {
   
     const client = await appsyncClient.hydrated()
     const result = await client.mutate({ mutation, variables })
