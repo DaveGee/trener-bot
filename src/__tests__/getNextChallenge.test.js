@@ -1,6 +1,7 @@
 
 process.env.API_TRENERBOTAPI_GRAPHQLAPIENDPOINTOUTPUT = 'https://localhost/graphql'
 process.env.FUNCTION_SENDCHALLENGETOUSER_NAME = 'sendChallengeToUserLambda'
+process.env.FUNCTION_UPDATECARDSTATS_NAME = 'updateCardStatsLambda'
 process.env.REGION = 'us-east-1'
 
 const aws = require('../../amplify/backend/function/getNextChallenge/src/node_modules/aws-sdk')
@@ -122,6 +123,23 @@ describe('GetNextChallenge should', () => {
     expect(lambdaInvoke).not.toHaveBeenCalled()
   })
 
-  test.todo('update the showed statistic, asynchronously')
+  test('update the showed statistic, asynchronously', async () => {
+    getCardsMock.mockImplementation(() => set1.mockResult)
+
+    await getNextChallenge.handler(argumentWithUser)
+
+    const expectedArguments = {
+      FunctionName: process.env.FUNCTION_UPDATECARDSTATS_NAME,
+      InvokeArgs: JSON.stringify({
+        arguments: {
+          userId: user1,
+          card: set1.nextChallenge,
+          showed: set1.nextChallenge.showed + 1
+        }
+      })
+    }
+
+    expect(lambdaInvoke).toHaveBeenNthCalledWith(2, expectedArguments)
+  })
 
 })  

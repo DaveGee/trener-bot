@@ -1,4 +1,12 @@
 /* Amplify Params - DO NOT EDIT
+	API_TRENERBOTAPI_GRAPHQLAPIENDPOINTOUTPUT
+	API_TRENERBOTAPI_GRAPHQLAPIIDOUTPUT
+	AUTH_TRENERBOT81AE6A93_USERPOOLID
+	ENV
+	FUNCTION_SENDCHALLENGETOUSER_NAME
+	FUNCTION_UPDATECARDSTATS_NAME
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 You can access the following resource attributes as environment variables from your Lambda function
 var environment = process.env.ENV
 var region = process.env.REGION
@@ -21,6 +29,7 @@ const { DateTime } = require('luxon')
 const url = process.env.API_TRENERBOTAPI_GRAPHQLAPIENDPOINTOUTPUT
 const region = process.env.REGION
 const sendToUserLambda = process.env.FUNCTION_SENDCHALLENGETOUSER_NAME
+const updateStatsLambda = process.env.FUNCTION_UPDATECARDSTATS_NAME
 
 AWS.config.update({
   region,
@@ -95,6 +104,21 @@ const sendCardToUser = async (userId, card) => {
   await lambda.invokeAsync(senderEvent).promise()
 }
 
+const updateShowedStat = async (userId, card) => {
+  const senderEvent = {
+    FunctionName: updateStatsLambda,
+    InvokeArgs: JSON.stringify({
+      arguments: {
+        userId,
+        card,
+        showed: (card.showed || 0) + 1
+      }
+    })
+  }
+  const lambda = new AWS.Lambda()
+  await lambda.invokeAsync(senderEvent).promise()
+}
+
 const handler = async (event) => {
   if (!event || !event.arguments || !event.arguments.userId)
     throw new Error('No owner specified for getNextChallenge')
@@ -116,6 +140,7 @@ const handler = async (event) => {
     } else {
       card = result.data.cardsByOldestPractice.items.reduce(nextChallengeReducer)
       await sendCardToUser(userId, card)
+      updateShowedStat(userId, card)
     }
 
     return { 

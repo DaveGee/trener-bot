@@ -1,22 +1,26 @@
 {
-    "permissions": {
-        "api": {
-            "trenerBotApi": [
-                "create",
-                "read",
-                "update",
-                "delete"
-            ]
-        },
-        "auth": {
-            "trenerbot81ae6a93": [
-                "read"
-            ]
-        },
-        "function": {
-            "sendChallengeToUser": [
-                "read"
-            ]
-        }
+  "permissions": {
+    "api": {
+      "trenerBotApi": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "auth": {
+      "trenerbot81ae6a93": [
+        "read"
+      ]
+    },
+    "function": {
+      "sendChallengeToUser": [
+        "read"
+      ],
+      "updateCardStats": [
+        "read"
+      ]
     }
+  },
+  "lambdaLayers": []
 }
