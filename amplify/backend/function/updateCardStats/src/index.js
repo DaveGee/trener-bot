@@ -66,6 +66,7 @@ exports.handler = async (event) => {
 
   const userId = event.arguments.userId
   const card = event.arguments.card
+  const quality = event.arguments.quality
 
   let cardMutator = {
     id: card.id
@@ -77,7 +78,7 @@ exports.handler = async (event) => {
   if (isNumber(card.wrong))
     cardMutator.wrong = card.wrong
 
-  if (isNumber(event.arguments.quality)) {
+  if (isNumber(quality)) {
     const defaultValues = superMemo.defaultCard()
     cardMutator.easiness = isNumber(card.easiness) ? card.easiness : defaultValues.easiness
     cardMutator.repetitions = isNumber(card.repetitions) ? card.repetitions : defaultValues.repetitions
@@ -87,11 +88,11 @@ exports.handler = async (event) => {
   }
 
   const variables = {
-    cardMutator
+    // needs to be called "card" for graphQL
+    card: cardMutator
   }
 
   try {
-  
     const client = await appsyncClient.hydrated()
     const result = await client.mutate({ mutation, variables })
     

@@ -133,8 +133,10 @@ describe('GetNextChallenge should', () => {
       InvokeArgs: JSON.stringify({
         arguments: {
           userId: user1,
-          card: set1.nextChallenge,
-          showed: set1.nextChallenge.showed + 1
+          card: {
+            ...set1.nextChallenge,
+            showed: set1.nextChallenge.showed + 1
+          }
         }
       })
     }

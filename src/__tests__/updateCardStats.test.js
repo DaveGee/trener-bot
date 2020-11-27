@@ -82,7 +82,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator
+        card: cardMutator
       }
     })
   })
@@ -99,7 +99,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator: {
+        card: {
           id: cardMock.id,
           showed: cardMock.showed,
           correct: cardMock.correct,
@@ -121,7 +121,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator: {
+        card: {
           id: cardMock.id,
           showed: cardMock.showed,
           correct: cardMock.correct,
@@ -144,7 +144,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator: {
+        card: {
           id: cardMock.id,
           showed: cardMock.showed,
           correct: cardMock.correct,
@@ -169,7 +169,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator: {
+        card: {
           id: invalidCardMutator.id
         }
       }
@@ -192,7 +192,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator: {
+        card: {
           id: invalidCardMutator.id,
           wrong: 1,
         }
@@ -215,7 +215,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator: {
+        card: {
           id: invalidCardMutator.id
         }
       }
@@ -237,7 +237,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator: {
+        card: {
           id: cardMock.id,
           easiness: expect.any(Number),
           repetitions: expect.any(Number),
@@ -266,7 +266,7 @@ describe('updateCardStats should', () => {
     expect(mutationFunc).toHaveBeenCalledWith({
       mutation: expect.any(Object),
       variables: {
-        cardMutator: {
+        card: {
           id: cardMock.id,
           showed: cardMock.showed,
           wrong: cardMock.wrong,

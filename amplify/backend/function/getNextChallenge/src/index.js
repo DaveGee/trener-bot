@@ -110,8 +110,10 @@ const updateShowedStat = async (userId, card) => {
     InvokeArgs: JSON.stringify({
       arguments: {
         userId,
-        card,
-        showed: (card.showed || 0) + 1
+        card: {
+          ...card,
+          showed: (card.showed || 0) + 1
+        },
       }
     })
   }
@@ -140,7 +142,7 @@ const handler = async (event) => {
     } else {
       card = result.data.cardsByOldestPractice.items.reduce(nextChallengeReducer)
       await sendCardToUser(userId, card)
-      updateShowedStat(userId, card)
+      await updateShowedStat(userId, card)
     }
 
     return { 
