@@ -16,6 +16,7 @@ export const createCard = /* GraphQL */ `
       question
       answer
       createdAt
+      updatedAt
       owner
       showed
       correct
@@ -24,7 +25,6 @@ export const createCard = /* GraphQL */ `
       interval
       easiness
       nextPractice
-      updatedAt
     }
   }
 `;
@@ -38,6 +38,7 @@ export const deleteCard = /* GraphQL */ `
       question
       answer
       createdAt
+      updatedAt
       owner
       showed
       correct
@@ -46,7 +47,6 @@ export const deleteCard = /* GraphQL */ `
       interval
       easiness
       nextPractice
-      updatedAt
     }
   }
 `;
@@ -60,6 +60,7 @@ export const updateCard = /* GraphQL */ `
       question
       answer
       createdAt
+      updatedAt
       owner
       showed
       correct
@@ -68,7 +69,6 @@ export const updateCard = /* GraphQL */ `
       interval
       easiness
       nextPractice
-      updatedAt
     }
   }
 `;

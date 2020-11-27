@@ -10,6 +10,7 @@ type Card
   question: String!
   answer: String!
   createdAt: AWSDateTime
+  updatedAt: AWSDateTime
   owner: String
   
   showed: Int

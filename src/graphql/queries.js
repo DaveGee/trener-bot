@@ -8,6 +8,7 @@ export const getCard = /* GraphQL */ `
       question
       answer
       createdAt
+      updatedAt
       owner
       showed
       correct
@@ -16,7 +17,6 @@ export const getCard = /* GraphQL */ `
       interval
       easiness
       nextPractice
-      updatedAt
     }
   }
 `;
@@ -32,6 +32,7 @@ export const listCards = /* GraphQL */ `
         question
         answer
         createdAt
+        updatedAt
         owner
         showed
         correct
@@ -40,7 +41,6 @@ export const listCards = /* GraphQL */ `
         interval
         easiness
         nextPractice
-        updatedAt
       }
       nextToken
     }
@@ -68,6 +68,7 @@ export const cardsByOldestPractice = /* GraphQL */ `
         question
         answer
         createdAt
+        updatedAt
         owner
         showed
         correct
@@ -76,7 +77,6 @@ export const cardsByOldestPractice = /* GraphQL */ `
         interval
         easiness
         nextPractice
-        updatedAt
       }
       nextToken
     }
